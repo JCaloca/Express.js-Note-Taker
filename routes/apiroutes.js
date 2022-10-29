@@ -1,32 +1,30 @@
 const router = require("express").Router();
+const fs = require("fs");
 const { v4: uuidv4 } = require("uuid");
-const { readAndAppend, readFromFile } = require("../helpers/fsUtils");
 
-router.get("/notes", (req, res) =>
-  readFromFile("./db/db.json").then((data) => res.json(JSON.parse(data)))
-);
-
-router.post("/notes", (req, res) => {
-  const { title, text } = req.body;
-
-  if (title && text) {
-    const newNote = {
-      title,
-      text,
-      note_id: uuidv4(),
-    };
-
-    readAndAppend(newNote, ".db/db.json");
-
-    const response = {
-      status: "success",
-      body: newNote,
-    };
-
-    res.json(response);
-  } else {
-    res.json("Error in posting note");
-  }
+router.get("/notes", (req, res) => {
+  fs.readFile("./db/db.json", "utf8", (err, data) => {
+    if (err) throw err;
+    return res.json(JSON.parse(data));
+  });
 });
 
-module.exports = router;
+router.post("/notes", (req, res) => {
+  console.log(req.body);
+  let obj = {
+    id: uuidv4(),
+    title: req.body.title,
+    text: req.body.text,
+  };
+  console.log(obj);
+  fs.opendirSync("./db/db.json", "utf8", (err, data) => {
+    if (err) throw err;
+    let db = JSON.parse(data);
+    db.push(obj);
+    console.log(db);
+    fs.writeFile("./db/db.json", JSON.stringify(db), (err) => {
+      if (err) throw err;
+      return res.json(db);
+    });
+  });
+});
