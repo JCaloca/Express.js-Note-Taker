@@ -17,7 +17,7 @@ router.post("/notes", (req, res) => {
     text: req.body.text,
   };
   console.log(obj);
-  fs.opendirSync("./db/db.json", "utf8", (err, data) => {
+  fs.readFile("./db/db.json", "utf8", (err, data) => {
     if (err) throw err;
     let db = JSON.parse(data);
     db.push(obj);
@@ -28,3 +28,5 @@ router.post("/notes", (req, res) => {
     });
   });
 });
+
+module.exports = router;
