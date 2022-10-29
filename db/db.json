@@ -1,1 +1,13 @@
-[{"title":"Test Title","text":"Test text"},{"id":"58f52102-4ecf-4485-b35f-df3443720d15","title":"asdifjlkas","text":"jsdfjia"},{"id":"1cdda6a0-12d4-447a-a1d9-5bed1c783341","title":"hljsF","text":"JASDLFJ\n"}]
+[
+  { "title": "Test Title", "text": "Test text" },
+  {
+    "id": "58f52102-4ecf-4485-b35f-df3443720d15",
+    "title": "Bank",
+    "text": "Withdraw weekly allowance."
+  },
+  {
+    "id": "1cdda6a0-12d4-447a-a1d9-5bed1c783341",
+    "title": "Groceries",
+    "text": "Buy weekly groceries\n"
+  }
+]
